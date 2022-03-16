@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Héros{% endblock %}
+
+{% block body %}
+    <h1>Factions</h1>
+
+    <ul>
+        {% for faction in factions %}
+            <li><a href="{{ path('faction', { faction_path : faction.getFactionPath }) }}" class="hero-link">{{ faction.getFactionName }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {% if is_administrator %}
+        <a href="{{ path('add_ability') }}" class="link">Ajouter une Compétences</a>
+        <a href="{{ path('add_hero') }}" class="link">Ajouter un Héro</a>
+    {% endif %}
+{% endblock %}

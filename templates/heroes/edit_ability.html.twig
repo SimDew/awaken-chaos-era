@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une Compétence{% endblock %}
+
+{% block body %}
+
+    <h1>Modifier une Compétence</h1>
+    <form method="post">
+
+        {# ----- information principale de la competence ----- #}
+        <label for="name">Nom de la Compétence</label>
+        <input type="text" name="name" id="name" required value="{{ ability.getAbilityName }}">
+
+        <label for="type">Type</label>
+        <select name="type" id="type">
+            {% for ability_type in ability_types %}
+                <option value="{{ ability_type.getId }}" {% if ability.getAbilityType == ability_type %}selected{% endif %}>{{ ability_type.getAbilityTypeName }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="description">Description</label>
+        <textarea name="description" id="description" cols="30" rows="10" required>{{ ability.getAbilityDescription }}</textarea>
+
+        <label for="cooldown">Délai de Récupération</label>
+        <input type="number" name="cooldown" id="cooldown" value="{{ ability.getAbilityCooldown }}">
+
+        <label for="image">Image</label>
+        <input type="text" name="image" id="image" required value="{{ ability.getAbilityImage }}">
+
+        {# ----- niveaux de la competence ----- #}
+        <label for="level_2">Niveau 2</label>
+        <input type="text" name="level_2" id="level_2" value="{{ ability.getAbilityLevel2 }}">
+
+        <label for="level_3">Niveau 3</label>
+        <input type="text" name="level_3" id="level_3" value="{{ ability.getAbilityLevel3 }}">
+
+        <label for="level_4">Niveau 4</label>
+        <input type="text" name="level_4" id="level_4" value="{{ ability.getAbilityLevel4 }}">
+
+        <label for="level_5">Niveau 5</label>
+        <input type="text" name="level_5" id="level_5" value="{{ ability.getAbilityLevel5 }}">
+
+        <label for="level_6">Niveau 6</label>
+        <input type="text" name="level_6" id="level_6" value="{{ ability.getAbilityLevel6 }}">
+
+        <label for="level_7">Niveau 7</label>
+        <input type="text" name="level_7" id="level_7" value="{{ ability.getAbilityLevel7 }}">
+
+        <label for="level_8">Niveau 8</label>
+        <input type="text" name="level_8" id="level_8" value="{{ ability.getAbilityLevel8 }}">
+
+        <button type="submit">Modifier</button>
+    </form>
+{% endblock %}

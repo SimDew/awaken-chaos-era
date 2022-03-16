@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un Héro{% endblock %}
+
+{% block body %}
+
+    <h1>Modifier un Héro</h1>
+    <form method="post">
+
+        {# ----- information principale du hero ----- #}
+        <label for="name">Nom du Héro</label>
+        <input type="text" name="name" id="name" required value="{{ hero.getHeroName }}">
+
+        {# selection de la faction du hero #}
+        <label for="faction">Faction</label>
+        <select name="faction" id="faction">
+            {% for faction in factions %}
+                <option value="{{ faction.getId }}" {% if hero.getHeroFaction == faction %}selected{% endif %}>{{ faction.getFactionName }}</option>
+            {% endfor %}
+        </select>
+
+        {# selection de la rarete du hero #}
+        <label for="rarity">Rareté</label>
+        <select name="rarity" id="rarity">
+            {% for rarity in rarities %}
+                <option value="{{ rarity.getId }}" {% if hero.getHeroRarity == rarity %}selected{% endif %}>{{ rarity.getRarityName }}</option>
+            {% endfor %}
+        </select>
+
+        {# selection de l'element du hero #}
+        <label for="element">Element</label>
+        <select name="element" id="element">
+            {% for element in elements %}
+                <option value="{{ element.getId }}" {% if hero.getHeroElement == element %}selected{% endif %}>{{ element.getElementName }}</option>
+            {% endfor %}
+        </select>
+
+        {# selection du type du hero #}
+        <label for="type">Type</label>
+        <select name="type" id="type">
+            {% for type in types %}
+                <option value="{{ type.getId }}" {% if hero.getHeroType == type %}selected{% endif %}>{{ type.getTypeName }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="image">Image</label>
+        <input type="text" name="image" id="image" required value="{{ hero.getHeroImage }}">
+
+        <label for="path">Path</label>
+        <input type="text" name="path" id="path" required value="{{ hero.getHeroPath }}">
+
+
+        {# ----- biographie du hero ----- #}
+        <label for="biography">Biographie</label>
+        <textarea name="biography" id="biography" cols="30" rows="10" required>{{ hero.getHeroBiography }}</textarea>
+
+
+        {# ----- statistiques du héro ----- #}
+        <label for="attack">Attaque</label>
+        <input type="number" name="attack" id="attack" required value="{{ hero.getHeroAttack }}">
+
+        <label for="health">PV</label>
+        <input type="number" name="health" id="health" required value="{{ hero.getHeroHealth }}">
+
+        <label for="defense">Défense</label>
+        <input type="number" name="defense" id="defense" required value="{{ hero.getHeroDefense }}">
+
+        <label for="speed">Vitesse</label>
+        <input type="number" name="speed" id="speed" required value="{{ hero.getHeroSpeed }}">
+
+        <label for="crit_rate">Taux de Crit.</label>
+        <input type="number" name="crit_rate" id="crit_rate" required value="{{ hero.getHeroCritRate }}">%
+
+        <label for="crit_damage">Dégâts de Crit.</label>
+        <input type="number" name="crit_damage" id="crit_damage" required value="{{ hero.getHeroCritDamage }}">%
+
+        <label for="focus">Concentration</label>
+        <input type="number" name="focus" id="focus" required value="{{ hero.getHeroFocus }}">%
+
+        <label for="resistance">Résistance</label>
+        <input type="number" name="resistance" id="resistance" required value="{{ hero.getHeroResistance }}">%
+
+        <label for="agility">Agilité</label>
+        <input type="number" name="agility" id="agility" required value="{{ hero.getHeroAgility }}">
+
+        <label for="precision">Précision</label>
+        <input type="number" name="precision" id="precision" required value="{{ hero.getHeroPrecision }}">
+
+
+        {# ----- competences du hero ----- #}
+
+        {# selection de la caracteristique du hero #}
+        <label for="trait_ability">Caractéristique</label>
+        <select name="trait_ability" id="trait_ability">
+            <option value="0">Aucune</option>
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 1 %}
+                    <option value="{{ ability.getId }}" {% if hero.getHeroTraitAbility == ability %}selected{% endif %}>{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        {# selection de la competence de base du hero #}
+        <label for="basic_ability">Compétence de Base</label>
+        <select name="basic_ability" id="basic_ability">
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 2 %}
+                    <option value="{{ ability.getId }}" {% if hero.getHeroBasicAbility == ability %}selected{% endif %}>{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        {# selection de la competence special du hero #}
+        <label for="special_ability">Compétence Spécial</label>
+        <select name="special_ability" id="special_ability">
+            <option value="0">Aucune</option>
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 2 or ability.getAbilityType.getId == 3 or ability.getAbilityType.getId == 4 %}
+                    <option value="{{ ability.getId }}" {% if hero.getHeroSpecialAbility == ability %}selected{% endif %}>{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        {# selection de la competence ultime du hero #}
+        <label for="ultimate_ability">Compétence Ultime</label>
+        <select name="ultimate_ability" id="ultimate_ability">
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 5 %}
+                    <option value="{{ ability.getId }}" {% if hero.getHeroUltimateAbility == ability %}selected{% endif %}>{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <button type="submit">Modifier</button>
+    </form>
+{% endblock %}

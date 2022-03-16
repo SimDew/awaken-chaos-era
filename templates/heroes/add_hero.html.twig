@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Héro{% endblock %}
+
+{% block body %}
+
+    <h1>Ajouter un Héro</h1>
+    <form method="post">
+
+        {# ----- information principale du hero ----- #}
+        <label for="name">Nom du Héro</label>
+        <input type="text" name="name" id="name" required>
+        
+        {# selection de la faction #}
+        <label for="faction">Faction</label>
+        <select name="faction" id="faction" required>
+            {% for faction in factions %}
+                <option value="{{ faction.getId }}">{{ faction.getFactionName }}</option>
+            {% endfor %}
+        </select>
+
+        {# selection de la rarete du hero #}
+        <label for="rarity">Rareté</label>
+        <select name="rarity" id="rarity" required>
+            {% for rarity in rarities %}
+                <option value="{{ rarity.getId }}">{{ rarity.getRarityName }}</option>
+            {% endfor %}
+        </select>
+
+        {# selection de l'element du hero #}
+        <label for="element">Element</label>
+        <select name="element" id="element" required>
+            {% for element in elements %}
+                <option value="{{ element.getId }}">{{ element.getElementName }}</option>
+            {% endfor %}
+        </select>
+
+        {# selection du type du hero #}
+        <label for="type">Type</label>
+        <select name="type" id="type" required>
+            {% for type in types %}
+                <option value="{{ type.getId }}">{{ type.getTypeName }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="image">Image</label>
+        <input type="text" name="image" id="image" required>
+
+        <label for="path">Path</label>
+        <input type="text" name="path" id="path" required>
+
+
+        {# ----- biographie du hero ----- #}
+        <label for="biography">Biographie</label>
+        <textarea name="biography" id="biography" cols="30" rows="10" required></textarea>
+
+
+        {# ----- statistiques du héro ----- #}
+        <label for="attack">Attaque</label>
+        <input type="number" name="attack" id="attack" required>
+
+        <label for="health">PV</label>
+        <input type="number" name="health" id="health" required>
+
+        <label for="defense">Défense</label>
+        <input type="number" name="defense" id="defense" required>
+
+        <label for="speed">Vitesse</label>
+        <input type="number" name="speed" id="speed" required>
+
+        <label for="crit_rate">Taux de Crit.</label>
+        <input type="number" name="crit_rate" id="crit_rate" required>%
+
+        <label for="crit_damage">Dégâts de Crit.</label>
+        <input type="number" name="crit_damage" id="crit_damage" value="150" required>%
+
+        <label for="focus">Concentration</label>
+        <input type="number" name="focus" id="focus" value="0">%
+
+        <label for="resistance">Résistance</label>
+        <input type="number" name="resistance" id="resistance" value="0" required>%
+
+        <label for="agility">Agilité</label>
+        <input type="number" name="agility" id="agility" value="5" required>
+
+        <label for="precision">Précision</label>
+        <input type="number" name="precision" id="precision" value="100" required>
+
+
+        {# ----- competences du hero ----- #}
+
+        {# selection de la caracteristique du hero #}
+        <label for="trait_ability">Caractéristique</label>
+        <select name="trait_ability" id="trait_ability">
+            <option value="0">Aucune</option>
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 1 %}
+                    <option value="{{ ability.getId }}">{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        {# selection de la competence de base du hero #}
+        <label for="basic_ability">Compétence de Base</label>
+        <select name="basic_ability" id="basic_ability">
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 2 %}
+                    <option value="{{ ability.getId }}">{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        {# selection de la competence special du hero #}
+        <label for="special_ability">Compétence Spécial</label>
+        <select name="special_ability" id="special_ability">
+            <option value="0">Aucune</option>
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 2 or ability.getAbilityType.getId == 3 or ability.getAbilityType.getId == 4 %}
+                    <option value="{{ ability.getId }}">{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        {# selection de la competence ultime du hero #}
+        <label for="ultimate_ability">Compétence Ultime</label>
+        <select name="ultimate_ability" id="ultimate_ability">
+            {% for ability in abilities %}
+                {% if ability.getAbilityType.getId == 5 %}
+                    <option value="{{ ability.getId }}">{{ ability.getAbilityName }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <button type="submit">Ajouter</button>
+    </form>
+{% endblock %}

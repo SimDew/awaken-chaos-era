@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ faction.getFactionName }}{% endblock %}
+
+{% block body %}
+    <h1>{{ faction.getFactionName }}</h1>
+
+    <ul>
+        {% for hero in heroes %}
+            <li><a href="{{ path('hero', { faction_path : hero.getHeroFaction.getFactionPath, hero_path : hero.getHeroPath }) }}" class="hero-link">{{ hero.getHeroName }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <br><a href="{{ path('heroes') }}" class="link">Retour</a>
+
+{% endblock %}

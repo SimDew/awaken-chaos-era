@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ hero.getHeroName }}{% endblock %}
+
+{% block body %}
+
+    {# ----- affichage des informations principales du héro ----- #}
+    <h1>{{ hero.getHeroName }}</h1>
+    <img src="{{ asset(hero.getHeroImage) }}" alt="">
+    <div>Faction : {{ hero.getHeroFaction.getFactionName }}</div>
+    <div>Rareté : {{ hero.getHeroRarity.getRarityName }}</div>
+    <div>Élément : {{ hero.getHeroElement.getElementName }}</div>
+    <div>Type : {{ hero.getHeroType.getTypeName }}</div>
+
+    <br>
+
+    {# ----- affichage de le biographie du héro ----- #}
+    <div>{{ hero.getHeroBiography }}</div>
+
+    <br>
+
+    {# ----- affichage des statistiques du héro ----- #}
+    <div>Attack : {{ hero.getHeroAttack }}</div>
+    <div>PV : {{ hero.getHeroHealth }}</div>
+    <div>Défense : {{ hero.getHeroDefense }}</div>
+    <div>Vitesse : {{ hero.getHeroSpeed }}</div>
+    <div>Taux de Crit. : {{ hero.getHeroCritRate }}%</div>
+    <div>Dégâts de Crit. : {{ hero.getHeroCritDamage }}%</div>
+    <div>Concentration : {{ hero.getHeroFocus }}%</div>
+    <div>Résistance : {{ hero.getHeroResistance }}%</div>
+    <div>Agilité : {{ hero.getHeroAgility }}</div>
+    <div>Précision : {{ hero.getHeroPrecision }}</div>
+
+    {# ----- affichage des compétences du héro ----- #}
+    {% for ability in abilities %}
+        {% if ability %}
+            <br>
+
+            <img src="{{ asset(ability.getAbilityImage) }}" alt="">
+            <span>{{ ability.getAbilityName }}</span> - <span>{{ ability.getAbilityType.getAbilityTypeName }}</span>
+            {% if ability.getAbilityCooldown %}
+                - <span>{{ ability.getAbilityCooldown }} tour(s)</span>
+            {% endif %}
+
+            {# modification de la competence possible si connecter en administrateur #}
+            {% if is_administrator %}
+                <a href="{{ path('edit_ability', { faction_path : hero.getHeroFaction.getFactionPath, hero_path : hero.getHeroPath, id : ability.getId }) }}" class="link">Modifier la Compétence</a>
+            {% endif %}
+
+            <div style="margin-top: 15px">{{ ability.getAbilityDescription }}</div>
+
+            {# ----- affichage des niveaux des compétences du héro ----- #}
+            {% set abilities_level = [ability.getAbilityLevel2, ability.getAbilityLevel3, ability.getAbilityLevel4, ability.getAbilityLevel5, ability.getAbilityLevel6, ability.getAbilityLevel7, ability.getAbilityLevel8] %}
+
+            {% for ability_level in abilities_level %}
+                {% if ability_level %}
+                    <div>
+                        {% if ability.getAbilityType.getAbilityTypeName == 'Caractéristique' %}
+                            Effets d'Ascension
+                        {% else %}
+                            Niveau {{ loop.index + 1 }}
+                        {% endif %}
+                        : {{ ability_level }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    <br><a href="{{ path('faction', { faction_path : hero.getHeroFaction.getFactionPath}) }}" class="link">Retour</a>
+
+    {% if is_administrator %}
+        <a href="{{ path('edit_hero', { faction_path : hero.getHeroFaction.getFactionPath, hero_path : hero.getHeroPath }) }}" class="link">Modifier le Héro</a>
+        {{ include('heroes/delete_hero.html.twig') }}
+    {% endif %}
+
+{% endblock %}

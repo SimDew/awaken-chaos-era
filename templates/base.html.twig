@@ -8,12 +8,37 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('/styles/style.css') }}">
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
+
+        {% set is_connected = is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% set is_administrator = is_granted('ROLE_ADMIN') %}
+
+        <nav class="navbar">
+            <a href="{{ path('home') }}" class="navbar-brand"><img src="{{ asset('/assets/images/web_site-logo.png') }}" alt="" class="nav-logo"></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ path('news') }}" class="nav-link">News</a></li>
+                <li class="nav-item"><a href="{{ path('guides') }}" class="nav-link">Guides</a></li>{# renomer le path par guides #}
+                <li class="nav-item"><a href="{{ path('heroes') }}" class="nav-link">Héros</a></li>
+                <li class="nav-item"><a href="{{ path('tier_list') }}" class="nav-link">Tier List</a></li>
+            </ul>
+            <ul class="nav-connection">
+                {% if is_connected %}
+                    <li class="nav-item"><a href="{{ path('account') }}" class="nav-btn" title="{{ app.user.email }}">Mon Compte</a></li>
+                    <li class="nav-item"><a href="{{ path('logout') }}" class="nav-btn">Se Déconnecter</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ path('register') }}" class="nav-btn">S'inscrire</a></li>
+                    <li class="nav-item"><a href="{{ path('login') }}" class="nav-btn">Se Connecter</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
         {% block body %}{% endblock %}
+
     </body>
 </html>

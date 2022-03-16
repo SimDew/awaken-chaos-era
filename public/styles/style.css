@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --navbar-background-color: #32373c;
+    --navbar-black: #000000;
+    --navbar-orange: #eaa460;
+    --navbar-orange-hover: #ea8928;
+    --navber-wheat: #feeacf;
+    --navbar-logo-size: 55px;
+
+    --background-color: #181a1c;
+
+    --form-background: #181a1c;
+    --form-orange: #eaa460;
+    --form-orange-hover: #ea8928;
+}
+
+body {
+    margin: 0;
+    font-family: 'Volkhov', sans-serif;
+    background-color: var(--background-color);
+    color: white;
+}
+
+
+/* ----- NAVBAR ----- */
+.navbar {
+    display: grid;
+    grid-template-columns: 0.7fr 3fr 0.9fr;
+    background-color: var(--navbar-background-color);
+    box-shadow: 0 1px 0 var(--navber-wheat);
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-menu, .nav-connection, .navbar-brand {
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 0;
+}
+
+.nav-logo {
+    width: var(--navbar-logo-size);
+    height: var(--navbar-logo-size);
+    border-radius: 7px;
+}
+
+.nav-link, .nav-btn, .link {
+    text-decoration: none;
+    color: var(--navbar-orange);
+    font-weight: bold;
+    transition: 250ms ease;
+}
+
+.nav-link {
+    font-size: 1.75rem;
+    letter-spacing: 1px;
+    text-shadow: 1px 0 0 var(--navbar-black), -1px 0 0 var(--navbar-black), 0 1px 0 var(--navbar-black), 0 -1px 0 var(--navbar-black), 1px 1px 0 var(--navbar-black), 1px -1px 0 var(--navbar-black), -1px -1px 0 var(--navbar-black), -1px 1px 0 var(--navbar-black);
+}
+.nav-link:hover {
+    color: var(--navbar-orange-hover);
+}
+
+.nav-btn, .link {
+    padding: 5px 7px;
+    font-size: 0.85rem;
+    box-sizing: border-box;
+    border: solid var(--navbar-orange) 2px;
+    border-radius: 7px;
+}
+.nav-btn:hover, .link:hover {
+    border-color: var(--navbar-orange-hover);
+    background-color: var(--navbar-orange-hover);
+    color: var(--navbar-black);
+}
+
+
+/* ----- FORM ----- */
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem;
+}
+
+input, textarea, select {
+    color: white;
+    padding: 5px;
+    margin-bottom: 1rem;
+    background-color: var(--form-background);
+    border: solid var(--form-orange) 1px;
+    border-radius: 7px;
+}
+
+button {
+    color: var(--form-orange);
+    padding: 5px 7px;
+    font-size: 0.85rem;
+    box-sizing: border-box;
+    background-color: var(--form-background);
+    border: solid var(--form-orange) 2px;
+    border-radius: 7px;
+    transition: 250ms ease;
+}
+
+button:hover {
+    border-color: var(--navbar-orange-hover);
+    background-color: var(--navbar-orange-hover);
+    color: var(--navbar-black);
+}
+
+.link {
+    margin: 10px;
+}
+
+.hero-link {
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: var(--form-orange);
+    transition: 250ms ease;
+}
+
+.hero-link:hover {
+    color: var(--form-orange-hover);
+}
